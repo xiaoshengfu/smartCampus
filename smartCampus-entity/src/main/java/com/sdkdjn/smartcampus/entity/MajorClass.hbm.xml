@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sdkdjn.smartcampus.entity.MajorClass" table="smart_campus_major_class" catalog="smart_campus">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="school" class="com.sdkdjn.smartcampus.entity.School" fetch="select">
+            <column name="school_id" length="32" not-null="true" />
+        </many-to-one>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="20" not-null="true" />
+        </property>
+        <property name="information" type="java.lang.String">
+            <column name="information" />
+        </property>
+        <set name="students" inverse="true">
+            <key>
+                <column name="major_class_id" length="32" not-null="true" />
+            </key>
+            <one-to-many class="com.sdkdjn.smartcampus.entity.Student" />
+        </set>
+        <set name="signinActivities" inverse="true" table="smart_campus_classactivity_relationship" catalog="smart_campus">
+            <key>
+                <column name="major_class_id" length="32" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.sdkdjn.smartcampus.entity.SigninActivity">
+                <column name="signin_activity_id" length="32" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

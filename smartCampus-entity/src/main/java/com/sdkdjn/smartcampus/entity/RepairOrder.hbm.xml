@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sdkdjn.smartcampus.entity.RepairOrder" table="smart_campus_repair_order" catalog="smart_campus">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <many-to-one name="school" class="com.sdkdjn.smartcampus.entity.School" fetch="select">
+            <column name="school_id" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="student" class="com.sdkdjn.smartcampus.entity.Student" fetch="select">
+            <column name="student_id" length="32" not-null="true" />
+        </many-to-one>
+        <property name="orderDate" type="java.sql.Timestamp">
+            <column name="order_date" length="0" not-null="true" />
+        </property>
+        <property name="pictureUrl" type="java.lang.String">
+            <column name="picture_url" length="10" />
+        </property>
+        <property name="place" type="java.lang.String">
+            <column name="place" length="100" not-null="true" />
+        </property>
+        <property name="information" type="java.lang.String">
+            <column name="information" />
+        </property>
+        <property name="orderState" type="java.lang.Integer">
+            <column name="order_state" />
+        </property>
+        <property name="rating" type="java.lang.Integer">
+            <column name="rating" />
+        </property>
+        <property name="evaluationContent" type="java.lang.String">
+            <column name="evaluation_content" />
+        </property>
+        <property name="telephone" type="java.lang.String">
+            <column name="telephone" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

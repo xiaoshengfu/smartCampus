@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sdkdjn.smartcampus.entity.Student" table="smart_campus_student" catalog="smart_campus">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="majorClass" class="com.sdkdjn.smartcampus.entity.MajorClass" fetch="select">
+            <column name="major_class_id" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="school" class="com.sdkdjn.smartcampus.entity.School" fetch="select">
+            <column name="school_id" length="32" not-null="true" />
+        </many-to-one>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="10" not-null="true" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="32" not-null="true" />
+        </property>
+        <property name="openid" type="java.lang.String">
+            <column name="openid" length="50" />
+        </property>
+        <set name="repairOrders" inverse="true">
+            <key>
+                <column name="student_id" length="32" not-null="true" />
+            </key>
+            <one-to-many class="com.sdkdjn.smartcampus.entity.RepairOrder" />
+        </set>
+        <set name="signinDetails" inverse="true">
+            <key>
+                <column name="student_id" length="32" not-null="true" />
+            </key>
+            <one-to-many class="com.sdkdjn.smartcampus.entity.SigninDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

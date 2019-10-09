@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sdkdjn.smartcampus.entity.SigninActivity" table="smart_campus_signin_activity" catalog="smart_campus">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="com.sdkdjn.smartcampus.entity.User" fetch="select">
+            <column name="user_id" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="curriculum" class="com.sdkdjn.smartcampus.entity.Curriculum" fetch="select">
+            <column name="curriculum_id" length="32" />
+        </many-to-one>
+        <property name="activityType" type="java.lang.Integer">
+            <column name="activity_type" not-null="true" />
+        </property>
+        <property name="duration" type="java.lang.Integer">
+            <column name="duration" not-null="true" />
+        </property>
+        <property name="information" type="java.lang.String">
+            <column name="information" />
+        </property>
+        <property name="activityDate" type="java.sql.Timestamp">
+            <column name="activity_date" length="0" not-null="true" />
+        </property>
+        <property name="totalPeople" type="java.lang.Integer">
+            <column name="total_people" not-null="true" />
+        </property>
+        <property name="longitude" type="java.lang.Double">
+            <column name="longitude" precision="22" scale="0" />
+        </property>
+        <property name="latitude" type="java.lang.Double">
+            <column name="latitude" precision="22" scale="0" />
+        </property>
+        <property name="state" type="java.lang.Integer">
+            <column name="state" />
+        </property>
+        <set name="majorClasses" table="smart_campus_classactivity_relationship" catalog="smart_campus">
+            <key>
+                <column name="signin_activity_id" length="32" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.sdkdjn.smartcampus.entity.MajorClass">
+                <column name="major_class_id" length="32" />
+            </many-to-many>
+        </set>
+        <set name="signinDetails" inverse="true">
+            <key>
+                <column name="signin_activity_id" length="32" not-null="true" />
+            </key>
+            <one-to-many class="com.sdkdjn.smartcampus.entity.SigninDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

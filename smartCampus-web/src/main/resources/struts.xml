@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<constant name="struts.action.extension" value="action"/>
+	<package name="basicstruts2" extends="struts-default" namespace="/">
+		<!-- 全局结果集定义 -->
+		<global-results>
+			<result name="login">/login.jsp</result>
+			<result name="unauthorized">/unauthorized.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="unauthorized" 
+				exception="org.apache.shiro.authz.UnauthorizedException"></exception-mapping>
+		</global-exception-mappings>
+		<!-- 需要进行权限控制的页面访问 -->
+		<action name="page_*_*">
+			<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+		<!-- 用户管理 -->
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="home">/index.jsp</result>
+			<result name="welcome">/WEB-INF/pages/common/welcome.jsp</result>
+			<result name="list">/WEB-INF/pages/user/userlist.jsp</result>
+			<result name="edit">/WEB-INF/pages/user/edituser.jsp</result>
+			<result name="add">/WEB-INF/pages/user/adduser.jsp</result>
+			<result name="batch_add">/WEB-INF/pages/user/batchadduser.jsp</result>
+			<result name="teacher_list">/WEB-INF/pages/user/teacherlist.jsp</result>
+			<result name="teacher_curriculum_list">/WEB-INF/pages/user/teachercurriculumlist.jsp</result>
+			<result name="add_user_curriculum">/WEB-INF/pages/user/addusercurriculum.jsp</result>
+			<result name="batch_add_user_curriculum">/WEB-INF/pages/user/batchaddusercurriculum.jsp</result>
+		</action>
+		<!-- 签到活动管理 -->
+		<action name="signinActivityAction_*" class="signinActivityAction" method="{1}">
+			<result name="list">/WEB-INF/pages/signin/signinactivitylist.jsp</result>
+			<result name="analysis">/WEB-INF/pages/signin/analysissigninactivity.jsp</result>
+		</action>
+		<!-- 签到详情管理 -->
+		<action name="signinDetailAction_*" class="signinDetailAction" method="{1}">
+			<result name="list">/WEB-INF/pages/signin/signindetailsigninlist.jsp</result>
+			<result name="list_no">/WEB-INF/pages/signin/signindetailnosigninlist.jsp</result>
+		</action>
+		<!-- 报修管理 -->
+		<action name="repairOrderAction_*" class="repairOrderAction" method="{1}">
+			<result name="list">/WEB-INF/pages/repair/repairorderlist.jsp</result>
+			<result name="details">/WEB-INF/pages/repair/repairorder.jsp</result>
+			<result name="analysis">/WEB-INF/pages/repair/analysisrepairorders.jsp</result>
+		</action>
+		<!-- 学生管理 -->
+		<action name="studentAction_*" class="studentAction" method="{1}">
+			<result name="list">/WEB-INF/pages/student/studentlist.jsp</result>
+			<result name="edit">/WEB-INF/pages/student/editstudent.jsp</result>
+			<result name="add">/WEB-INF/pages/student/addstudent.jsp</result>
+			<result name="batch_add">/WEB-INF/pages/student/batchaddstudent.jsp</result>
+		</action>
+		<!-- 班级管理 -->
+		<action name="majorClassAction_*" class="majorClassAction" method="{1}">
+			<result name="list">/WEB-INF/pages/majorclass/majorclasslist.jsp</result>
+			<result name="edit">/WEB-INF/pages/majorclass/editmajorclass.jsp</result>
+			<result name="add">/WEB-INF/pages/majorclass/addmajorclass.jsp</result>
+			<result name="batch_add">/WEB-INF/pages/majorclass/batchaddmajorclass.jsp</result>
+		</action>
+		<!-- 课程管理 -->
+		<action name="curriculumAction_*" class="curriculumAction" method="{1}">
+			<result name="list">/WEB-INF/pages/curriculum/curriculumlist.jsp</result>
+			<result name="edit">/WEB-INF/pages/curriculum/editcurriculum.jsp</result>
+			<result name="add">/WEB-INF/pages/curriculum/addcurriculum.jsp</result>
+			<result name="batch_add">/WEB-INF/pages/curriculum/batchaddcurriculum.jsp</result>
+		</action>
+		<!-- 微信授权页 -->
+		<action name="weChatAction" class="weChatAction" method="WeChat"></action>
+		<!-- 微信业务页 -->
+		<action name="weXinAction_*" class="weXinAction" method="{1}">
+			<result name="binding">/WEB-INF/pages/wexin/firstsave.jsp</result>
+			<result name="savesuccess">/WEB-INF/pages/wexin/userexist.jsp</result>
+			<result name="success">/WEB-INF/pages/wexin/success.jsp</result>
+			<result name="qiandao1">/WEB-INF/pages/wexin/qiandao1.jsp</result>
+			<result name="qiandaoforsk">/WEB-INF/pages/wexin/qiandaoforsk.jsp</result>
+			<result name="qiandaoforhy">/WEB-INF/pages/wexin/qiandaoforhy.jsp</result>
+			<result name="qiandaosuc">/WEB-INF/pages/wexin/qiandaosuc.jsp</result>
+		</action>
+	</package>
+</struts>

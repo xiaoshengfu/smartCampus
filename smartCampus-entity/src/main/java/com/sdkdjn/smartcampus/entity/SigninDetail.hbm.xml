@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sdkdjn.smartcampus.entity.SigninDetail" table="smart_campus_signin_detail" catalog="smart_campus">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="uuid" />
+        </id>
+        <many-to-one name="signinActivity" class="com.sdkdjn.smartcampus.entity.SigninActivity" fetch="select">
+            <column name="signin_activity_id" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="student" class="com.sdkdjn.smartcampus.entity.Student" fetch="select">
+            <column name="student_id" length="32" not-null="true" />
+        </many-to-one>
+        <property name="signinDate" type="java.sql.Timestamp">
+            <column name="signin_date" length="0" />
+        </property>
+        <property name="longitude" type="java.lang.Double">
+            <column name="longitude" precision="22" scale="0" />
+        </property>
+        <property name="latitude" type="java.lang.Double">
+            <column name="latitude" precision="22" scale="0" />
+        </property>
+        <property name="signinstate" type="java.lang.Integer">
+            <column name="signinstate" />
+        </property>
+    </class>
+</hibernate-mapping>
